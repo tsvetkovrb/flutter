@@ -17,6 +17,12 @@ class _TodoListScreenState extends State<TodoListScreen> {
     });
   }
 
+  _removeTdod(index) {
+    setState(() {
+      todos.removeAt(index);
+    });
+  }
+
   _addTodo() async {
     final todo = await showDialog<Todo>(
         context: context,
@@ -40,6 +46,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
       body: TodoList(
         todos: todos,
         onCompleteToggle: _toggleTodo,
+        onRemoveTodo: _removeTdod,
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
