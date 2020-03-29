@@ -65,6 +65,10 @@ class MyHomePage extends StatelessWidget {
                           padding: EdgeInsets.all(10),
                           child: Text(
                             transaction.amount.toString(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
                           ),
                           decoration: BoxDecoration(
                             border: Border.all(color: Colors.grey),
@@ -73,8 +77,22 @@ class MyHomePage extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text(transaction.title),
-                            Text(transaction.date.toString()),
+                            Container(
+                              margin: EdgeInsets.only(bottom: 10),
+                              child: Text(
+                                transaction.title,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                            Text(
+                              transaction.date.toString(),
+                              style: TextStyle(
+                                color: Colors.grey,
+                              ),
+                            ),
                           ],
                         )
                       ],
