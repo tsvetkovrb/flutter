@@ -42,18 +42,47 @@ class MyHomePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           Container(
+            padding: EdgeInsets.symmetric(horizontal: 10),
             width: double.infinity,
             child: Card(
               color: Colors.blue,
               child: Text('CHART'),
             ),
           ),
-          Column(
-            children: transactions.map((transaction) {
-              return Card(
-                child: Text(transaction.title),
-              );
-            }).toList(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              children: transactions.map(
+                (transaction) {
+                  return Card(
+                    child: Row(
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 15,
+                          ),
+                          padding: EdgeInsets.all(10),
+                          child: Text(
+                            transaction.amount.toString(),
+                          ),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey),
+                          ),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(transaction.title),
+                            Text(transaction.date.toString()),
+                          ],
+                        )
+                      ],
+                    ),
+                  );
+                },
+              ).toList(),
+            ),
           )
         ],
       ),
