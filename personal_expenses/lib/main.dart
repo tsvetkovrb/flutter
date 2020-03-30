@@ -40,7 +40,6 @@ class MyHomePage extends StatelessWidget {
         title: Text('Personal expenses'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           Container(
             padding: EdgeInsets.symmetric(horizontal: 10),
@@ -48,6 +47,27 @@ class MyHomePage extends StatelessWidget {
             child: Card(
               color: Colors.blue,
               child: Text('CHART'),
+            ),
+          ),
+          Card(
+            child: Padding(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Title'),
+                  ),
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Amount'),
+                  ),
+                  FlatButton(
+                    onPressed: () {},
+                    textColor: Colors.blue,
+                    child: Text('Add transaction'),
+                  )
+                ],
+              ),
             ),
           ),
           Padding(
