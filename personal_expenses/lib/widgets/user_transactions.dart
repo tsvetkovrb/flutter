@@ -27,16 +27,16 @@ class _UserTransactionsState extends State<UserTransactions> {
     ),
   ];
 
-  _addTransaction() {
+  void _addTransaction(String transactionTitle, double transactionAmount) {
+    final transaction = Transaction(
+      amount: transactionAmount,
+      date: DateTime.now(),
+      id: DateTime.now().toString(),
+      title: transactionTitle,
+    );
+    
     setState(() {
-      _userTransactions.add(
-        Transaction(
-          amount: double.parse(_amountController.text),
-          date: DateTime.now(),
-          id: DateTime.now().toString(),
-          title: _titleController.text,
-        ),
-      );
+      _userTransactions.add(transaction);
     });
     _amountController.text = '';
     _titleController.text = '';
@@ -47,8 +47,6 @@ class _UserTransactionsState extends State<UserTransactions> {
     return Column(
       children: <Widget>[
         NewTransaction(
-          amountController: _amountController,
-          titleController: _titleController,
           addTransaction: _addTransaction,
         ),
         TransactionList(transactions: _userTransactions),
