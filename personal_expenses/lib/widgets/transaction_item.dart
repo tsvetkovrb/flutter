@@ -23,10 +23,14 @@ class TransactionItem extends StatelessWidget {
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
+                color: Theme.of(context).primaryColor,
               ),
             ),
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey),
+              border: Border.all(
+                color: Theme.of(context).primaryColor,
+                width: 2,
+              ),
             ),
           ),
           Column(
@@ -36,10 +40,7 @@ class TransactionItem extends StatelessWidget {
                 margin: EdgeInsets.only(bottom: 10),
                 child: Text(
                   transaction.title,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
+                  style: Theme.of(context).textTheme.title
                 ),
               ),
               Text(
