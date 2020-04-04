@@ -25,9 +25,9 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return Container(
       child: Padding(
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.all(30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
@@ -42,9 +42,34 @@ class _NewTransactionState extends State<NewTransaction> {
               decoration: InputDecoration(labelText: 'Amount'),
               onSubmitted: (_) => handleSubmit(),
             ),
-            FlatButton(
+            Container(
+              height: 70,
+              child: Row(
+                children: <Widget>[
+                  Text(
+                    'No date picked!',
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                  FlatButton(
+                    onPressed: () {},
+                    child: Text(
+                      'Pick date',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).primaryColor,
+                        fontSize: 16,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            RaisedButton(
+              color: Theme.of(context).accentColor,
               onPressed: handleSubmit,
-              textColor: Colors.blue,
+              textColor: Theme.of(context).buttonColor,
               child: Text('Add transaction'),
             )
           ],

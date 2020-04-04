@@ -30,14 +30,17 @@ class TransactionList extends StatelessWidget {
                 ),
               ],
             )
-          : ListView.builder(
-              itemCount: transactions.length,
-              itemBuilder: (context, index) {
-                return TransactionItem(
-                  transaction: transactions[index],
-                );
-              },
-            ),
+          : Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            child: ListView.builder(
+                itemCount: transactions.length,
+                itemBuilder: (context, index) {
+                  return TransactionItem(
+                    transaction: transactions[index],
+                  );
+                },
+              ),
+          ),
     );
   }
 }
