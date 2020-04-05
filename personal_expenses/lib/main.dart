@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:personal_expenses/model/transaction.dart';
+import 'package:personal_expenses/utils/theme.dart';
 import 'package:personal_expenses/widgets/chart.dart';
 import 'package:personal_expenses/widgets/new_transaction.dart';
 import 'package:personal_expenses/widgets/transaction_list.dart';
@@ -11,30 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Personal expenses',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        accentColor: Color(0xff00A08A),
-        fontFamily: 'Quicksand',
-        textTheme: ThemeData.light().textTheme.copyWith(
-              title: TextStyle(
-                fontFamily: 'OpenSans',
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-        appBarTheme: AppBarTheme(
-          textTheme: ThemeData.light().textTheme.copyWith(
-                title: TextStyle(
-                  fontFamily: 'OpenSans',
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                ),
-                button: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-        ),
-      ),
+      theme: customTheme(),
       home: MyHomePage(),
     );
   }
