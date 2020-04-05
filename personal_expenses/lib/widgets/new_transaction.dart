@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class NewTransaction extends StatefulWidget {
   final Function addTransaction;
@@ -10,16 +11,35 @@ class NewTransaction extends StatefulWidget {
 }
 
 class _NewTransactionState extends State<NewTransaction> {
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
+  final _titleController = TextEditingController();
+  final _amountController = TextEditingController();
+  DateTime _pickedDate;
 
-  void handleSubmit() {
-    final enteredTitle = titleController.text;
-    final enteredAmount = double.parse(amountController.text);
+  void _handleSubmit() {
+    final amountText = _amountController.text;
+    if (amountText.isEmpty) {
+      return;
+    }
+    final enteredAmount = double.parse(amountText);
+    final enteredTitle = _titleController.text;
 
-    if (enteredTitle.isNotEmpty && enteredAmount > 0) {
-      widget.addTransaction(enteredTitle, enteredAmount);
+    if (enteredTitle.isNotEmpty && enteredAmount >= 0 && _pickedDate != null) {
+      widget.addTransaction(enteredTitle, enteredAmount, _pickedDate);
       Navigator.of(context).pop();
+    }
+  }
+
+  void _openDatePicker() async {
+    final date = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2020),
+      lastDate: DateTime.now(),
+    );
+    if (date != null) {
+      setState(() {
+        _pickedDate = date;
+      });
     }
   }
 
@@ -32,28 +52,32 @@ class _NewTransactionState extends State<NewTransaction> {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
             TextField(
-              controller: titleController,
+              controller: _titleController,
               decoration: InputDecoration(labelText: 'Title'),
-              onSubmitted: (_) => handleSubmit(),
+              onSubmitted: (_) => _handleSubmit(),
             ),
             TextField(
-              controller: amountController,
+              controller: _amountController,
               keyboardType: TextInputType.numberWithOptions(decimal: true),
               decoration: InputDecoration(labelText: 'Amount'),
-              onSubmitted: (_) => handleSubmit(),
+              onSubmitted: (_) => _handleSubmit(),
             ),
             Container(
               height: 70,
               child: Row(
                 children: <Widget>[
-                  Text(
-                    'No date picked!',
-                    style: TextStyle(
-                      fontSize: 16,
+                  Expanded(
+                    child: Text(
+                      _pickedDate == null
+                          ? 'No date picked!'
+                          : 'Picked date: ${DateFormat.yMd().format(_pickedDate)}',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                   FlatButton(
-                    onPressed: () {},
+                    onPressed: _openDatePicker,
                     child: Text(
                       'Pick date',
                       style: TextStyle(
@@ -68,7 +92,7 @@ class _NewTransactionState extends State<NewTransaction> {
             ),
             RaisedButton(
               color: Theme.of(context).accentColor,
-              onPressed: handleSubmit,
+              onPressed: _handleSubmit,
               textColor: Theme.of(context).buttonColor,
               child: Text('Add transaction'),
             )
