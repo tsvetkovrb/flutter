@@ -13,27 +13,31 @@ class TransactionList extends StatelessWidget {
     return Container(
       height: 300,
       child: transactions.isEmpty
-          ? Column(
-              children: <Widget>[
-                Text(
-                  'No transactions yet!',
-                  style: Theme.of(context).textTheme.title,
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Container(
-                  height: 200,
-                  child: Image.asset(
-                    'assets/images/waiting.png',
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ],
+          ? LayoutBuilder(
+              builder: (ctx, constrains) {
+                return Column(
+                  children: <Widget>[
+                    Text(
+                      'No transactions yet!',
+                      style: Theme.of(context).textTheme.title,
+                    ),
+                    SizedBox(
+                      height: constrains.maxHeight * 0.15,
+                    ),
+                    Container(
+                      height: constrains.maxHeight * 0.65,
+                      child: Image.asset(
+                        'assets/images/waiting.png',
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ],
+                );
+              },
             )
           : Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15),
-            child: ListView.builder(
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              child: ListView.builder(
                 itemCount: transactions.length,
                 itemBuilder: (context, index) {
                   return TransactionItem(
@@ -42,7 +46,7 @@ class TransactionList extends StatelessWidget {
                   );
                 },
               ),
-          ),
+            ),
     );
   }
 }

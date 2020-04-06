@@ -41,10 +41,17 @@ class TransactionItem extends StatelessWidget {
             color: Colors.grey,
           ),
         ),
-        trailing: FlatButton(
-          child: Icon(Icons.delete),
-          onPressed: () => deleteTransaction(transaction.id),
-        ),
+        trailing: MediaQuery.of(context).size.width > 460
+            ? FlatButton.icon(
+              textColor: Theme.of(context).accentColor,
+                onPressed: () => deleteTransaction(transaction.id),
+                icon: Icon(Icons.delete),
+                label: Text('Delete'),
+              )
+            : FlatButton(
+                child: Icon(Icons.delete),
+                onPressed: () => deleteTransaction(transaction.id),
+              ),
       ),
     );
   }
